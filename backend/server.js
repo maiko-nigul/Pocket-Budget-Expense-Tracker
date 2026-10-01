@@ -7,7 +7,8 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(express.json({ limit: '10kb' }))
-app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:5173" }));
+const corsOrigin = (process.env.CORS_ORIGIN || "http://localhost:5173").replace(/\/+$/, "");
+app.use(cors({ origin: corsOrigin }));
 
 app.use("/api",appRoutes)
 
